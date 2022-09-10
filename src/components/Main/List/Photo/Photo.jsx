@@ -9,21 +9,13 @@ import {Link} from 'react-router-dom';
 
 export const Photo = ({photoData}) => {
   const id = photoData.id;
-  console.log('id: ', id);
   const thumbnail = photoData.urls.regular;
-  console.log('thumbnail: ', thumbnail);
   const alt = photoData.alt_description;
-  console.log('alt: ', alt);
   const author = photoData.user.name;
-  console.log('author: ', author);
   const authorLink = photoData.user.links.html;
-  console.log('authorLink: ', authorLink);
   const date = photoData.created_at;
-  console.log('date: ', date);
   const likes = photoData.likes;
-  console.log('likes: ', likes);
   const isLiked = photoData.liked_by_user;
-  console.log('isLiked: ', isLiked);
 
   return (
     <li className={style.photo}>

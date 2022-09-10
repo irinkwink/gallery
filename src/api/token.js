@@ -1,5 +1,4 @@
 import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
 import {updateToken} from '../store/tokenReducer';
 import {
   ACCESS_KEY,
@@ -25,7 +24,6 @@ export const getTokenUrl = (code) => {
 };
 
 export const getToken = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem('bearer');
   if (token) {
@@ -47,10 +45,9 @@ export const getToken = () => {
         console.log('token: ', token);
         setToken(token);
         dispatch(updateToken(token));
+        location.replace('/');
       });
   }
-
-  navigate('/');
 
   return;
 };

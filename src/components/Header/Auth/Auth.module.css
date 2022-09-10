@@ -48,7 +48,7 @@
   transition: outline-color 0.36s ease-in-out;
 }
 
-.authLink:hover {
+/* .authLink:hover {
   outline-color: var(--orange);
 }
 
@@ -58,7 +58,7 @@
 
 .authLink:active {
   outline-color: var(--orange);
-}
+} */
 
 .svg {
   width: 100%;

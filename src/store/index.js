@@ -2,7 +2,7 @@ import {tokenMiddleware, tokenReducer} from './tokenReducer';
 import {authReducer} from './auth/authReducer';
 // import {commentReducer} from './commentReducer';
 import photosReducer from './photos/photosSlice';
-// import commentsReducer from './comments/commentsSlice';
+// import photoReducer from './photo/photoSlice';
 import {configureStore} from '@reduxjs/toolkit';
 
 export const store = configureStore({
@@ -11,7 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     // comment: commentReducer,
     photos: photosReducer,
-    // comments: commentsReducer,
+    // photo: photoReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tokenMiddleware)

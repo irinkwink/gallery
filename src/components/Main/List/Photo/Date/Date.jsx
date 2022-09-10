@@ -12,5 +12,5 @@ export const Date = ({date}) => {
 };
 
 Date.propTypes = {
-  date: PropTypes.number,
+  date: PropTypes.string,
 };
