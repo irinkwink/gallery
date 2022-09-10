@@ -1,0 +1,8 @@
+.linkAuthor {
+  position: relative;
+  transition: color 0.36s ease-in-out;
+}
+
+.linkAuthor:hover {
+  color: var(--orange);
+}

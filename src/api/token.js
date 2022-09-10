@@ -1,0 +1,56 @@
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {updateToken} from '../store/tokenReducer';
+import {
+  ACCESS_KEY,
+  API_URL_TOKEN,
+  REDIRECT_URI,
+  SECRET_KEY,
+} from './const';
+
+export const setToken = (token) => {
+  localStorage.setItem('bearer', token);
+};
+
+export const getTokenUrl = (code) => {
+  const searchParams = new URLSearchParams('');
+
+  searchParams.append('client_id', ACCESS_KEY);
+  searchParams.append('client_secret', SECRET_KEY);
+  searchParams.append('redirect_uri', REDIRECT_URI);
+  searchParams.append('code', code);
+  searchParams.append('grant_type', 'authorization_code');
+
+  return `${API_URL_TOKEN}?${searchParams.toString()}`;
+};
+
+export const getToken = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('bearer');
+  if (token) {
+    dispatch(updateToken(token));
+  }
+
+  if (location.search.includes('code')) {
+    const code = new URLSearchParams(location.search)
+      .get('code');
+    const url = getTokenUrl(code);
+
+    fetch(url, {method: 'POST'})
+      .then(response => response.json())
+      .then(data => {
+        console.log('data: ', data);
+        return data.access_token;
+      })
+      .then(token => {
+        console.log('token: ', token);
+        setToken(token);
+        dispatch(updateToken(token));
+      });
+  }
+
+  navigate('/');
+
+  return;
+};
