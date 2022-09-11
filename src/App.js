@@ -1,8 +1,8 @@
 import {Route, Routes} from 'react-router-dom';
 import {getToken} from './api/token';
-import {Header} from './components/Header/Header';
-import {Main} from './components/Main/Main';
-import {ErrorModal} from './components/ErrorModal/ErrorModal';
+import Header from './components/Header';
+import Main from './components/Main';
+import ErrorModal from './components/ErrorModal';
 
 function App() {
   getToken();
