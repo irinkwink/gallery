@@ -30,12 +30,6 @@ export const Auth = () => {
   };
 
   useEffect(() => {
-    if (!auth) {
-      navigate('/');
-    }
-  }, [auth]);
-
-  useEffect(() => {
     if (error) {
       navigate(`/`);
 

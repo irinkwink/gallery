@@ -1,8 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {ACCESS_KEY, API_URL} from '../../api/const';
-// import {photosSlice} from './photosSlice';
-
 
 export const photosRequestAsync = createAsyncThunk(
   'photos/fetch',

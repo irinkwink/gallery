@@ -9,7 +9,6 @@ import Preloader from '../../../UI/Preloader';
 import {generateRandomId} from '../../../utils/generateRandomId';
 import style from './List.module.css';
 import Photo from './Photo';
-// import {Text} from '../../../UI/Text';
 
 
 export const List = () => {
@@ -23,10 +22,12 @@ export const List = () => {
 
   const firstLoading = page === 1 ? loading : false;
 
+  const token = useSelector(state => state.token.token);
+
   useEffect(() => {
     dispatch(photosSlice.actions.photosClear());
     dispatch(photosRequestAsync());
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (error) {
