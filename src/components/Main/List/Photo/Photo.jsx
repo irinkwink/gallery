@@ -1,10 +1,10 @@
 import style from './Photo.module.css';
 import PropTypes from 'prop-types';
-import Image from './Image';
 import Likes from './Likes';
 import Author from './Author';
 import Date from './Date';
 import {Link} from 'react-router-dom';
+import {useState} from 'react';
 
 
 export const Photo = ({photoData}) => {
@@ -17,19 +17,32 @@ export const Photo = ({photoData}) => {
   const likes = photoData.likes;
   const isLiked = photoData.liked_by_user;
 
+  const [loading, setLoading] = useState(true);
+
+  const imageLoaded = () => {
+    setLoading(false);
+  };
 
   return (
-    <li className={style.photo}>
+    <li
+      className={style.photo}
+      style={{visibility: loading ? 'hidden' : 'visible'}}
+    >
       <Link
         className={style.linkPhoto}
         to={`/photo/${id}`}
       >
-        <Image link={thumbnail} alt={alt} />
+        <img
+          className={style.img}
+          src={thumbnail}
+          alt={alt}
+          onLoad={imageLoaded}
+        />
       </Link>
 
       <div className={style.content}>
         <div className={style.wrapper}>
-          <Likes likes={likes} liked={isLiked} id={id}/>
+          <Likes likes={likes} liked={isLiked} />
           <Author author={author} link={authorLink} />
         </div>
 

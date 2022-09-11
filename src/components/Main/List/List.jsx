@@ -17,21 +17,15 @@ export const List = () => {
 
   const photos = useSelector(state => state.photos.photos);
   const loading = useSelector(state => state.photos.loading);
-  console.log('loading: ', loading);
   const error = useSelector(state => state.photos.error);
-  console.log('error: ', error);
   const page = useSelector(state => state.photos.page);
   const endList = useRef(null);
 
   const firstLoading = page === 1 ? loading : false;
-  console.log('firstLoading: ', firstLoading);
-
-  const isShowButton = page > 2;
 
   useEffect(() => {
-    if (page === 1) {
-      dispatch(photosSlice.actions.photosClear());
-    }
+    dispatch(photosSlice.actions.photosClear());
+    dispatch(photosRequestAsync());
   }, []);
 
   useEffect(() => {
@@ -49,16 +43,11 @@ export const List = () => {
     dispatch(photosSlice.actions.photosClear());
   }, [error]);
 
-  const handleClick = (e) => {
-    e.target.blur();
-    dispatch(photosRequestAsync());
-  };
-
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        if (!location.search.includes('code')) {
+        if (page !== 1) {
           dispatch(photosRequestAsync());
         }
       }
@@ -74,7 +63,7 @@ export const List = () => {
         observer.unobserve(endList.current);
       }
     };
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -95,20 +84,13 @@ export const List = () => {
           )
         )}
       </ul>
-      {loading && !firstLoading ? (
+      {!firstLoading && (
+        loading && !firstLoading ? (
           <Preloader size={45} />
         ) : (
-          isShowButton ? (
-            <button
-              className={style.btn}
-              onClick={handleClick}
-            >
-              загрузить ещё
-            </button>
-          ) : (
-            <div className={style.end} ref={endList}/>
-          )
-        )}
+          <div className={style.end} ref={endList}/>
+        )
+      )}
       <Outlet />
     </>
   );

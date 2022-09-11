@@ -12,13 +12,20 @@
 
 
 .btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background-color: transparent;
   border: 0;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  height: 50px;
   overflow: hidden;
+}
+
+.btn:hover p {
+  color: var(--orange)
 }
 
 
@@ -33,8 +40,9 @@
 }
 
 .img {
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
   object-fit: cover;
 }
 
@@ -48,29 +56,19 @@
   transition: outline-color 0.36s ease-in-out;
 }
 
-/* .authLink:hover {
-  outline-color: var(--orange);
-}
-
-.authLink:focus {
-  outline-color: var(--orange);
-}
-
-.authLink:active {
-  outline-color: var(--orange);
-} */
-
 .svg {
   width: 100%;
   height: 100%;
   color: var(--orange);
+  transition: scale 0.36s ease-in-out;
 }
 
+.svg:hover {
+  scale: 1.2;
+}
 
 @media (min-width: 768px) {
-  .btn {
-    border-radius: 15px;
-    width: 50px;
-    height: 50px;
+  .logout {
+    font-size: 16px;
   }
 }

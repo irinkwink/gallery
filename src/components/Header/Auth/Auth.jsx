@@ -18,6 +18,12 @@ export const Auth = () => {
   const navigate = useNavigate();
   const [isExit, setExit] = useState(false);
 
+  const [loadingImg, setLoadingImg] = useState(true);
+
+  const imageLoaded = () => {
+    setLoadingImg(false);
+  };
+
   const logOut = () => {
     dispatch(deleteToken());
     clearAuth();
@@ -55,18 +61,20 @@ export const Auth = () => {
                 Выйти
               </button>
             )}
-            <button className={style.btn}>
-              <img
+            <div role='button'
+              className={style.btn}
+              onClick={() => setExit(!isExit)}>
+              <img style={{visibility: loadingImg ? 'hidden' : 'visible'}}
                 className={style.img}
                 src={auth.img}
                 title={auth.name}
                 alt={`Аватар ${auth.name}`}
-                onClick={() => setExit(!isExit)}
+                onLoad={imageLoaded}
               />
-            </button>
-            <Text As='p' color='black' size={14} tsize={16} bold>
-              {auth.name}
-            </Text>
+              <Text As='p' color='black' size={16} tsize={20} bold>
+                {auth.name}
+              </Text>
+            </div>
           </div>
         </>
       ) : (

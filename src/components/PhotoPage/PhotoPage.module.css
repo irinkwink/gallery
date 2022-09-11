@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--white);
+  height: calc(100vh - 100px);
+  padding-bottom: 10px;
+}
+
+.card {
+  max-height: 100%;
+  width: fit-content;
+  margin: 0, auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.img {
+  display: block;
+  align-self: center;
+  width: auto;
+  max-height: calc(100% - 50px);
+  /* object-fit: cover; */
+}
+
+.content {
+  z-index: 2;
+  /* position: absolute; */
+  display: flex;
+  background-color: var(--white);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+  gap:20px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.like,
+.liked {
+  background-color: transparent;
+  background-size: 26px;
+  background-position: left 2px center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  padding: 4px;
+  padding-left: 32px;
+  color: var(--black);
+  transition: background-image 0.36s ease-in-out;
+}
+
+.like {
+  background-image: url('./img/likes.svg');
+}
+
+.liked {
+  background-image: url('./img/liked.svg');
+}
+
+.like:hover,
+.liked:hover {
+  border-color: var(--orange);
+}
+
+
+.linkAuthor {
+  transition: color 0.36s ease-in-out;
+  cursor: pointer;
+}
+
+.linkAuthor:hover {
+  color: var(--orange);
+}
+
+.date {
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--black);
+}
+
+.close {
+  z-index: 100;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-color: var(--blue);
+  font-weight: 500;
+  transition: all 0.36s ease-in-out;
+}
+
+.close:hover {
+  background-color: var(--orange);
+  border-color: transparent;
+  color: var(--white)
+}
+
+@media (min-width: 580px) {
+  .date {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .close{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    border-color: var(--black);
+    background-color: transparent;
+    font-size: 18px;
+  }
+
+  .like,
+  .liked {
+    font-size: 22px;
+    background-size: 34px;
+    padding-left: 40px;
+    height: 40px;
+
+  }
+
+  .date {
+    font-size: 22px;
+  }
+  
+}
+

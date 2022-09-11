@@ -15,10 +15,7 @@ export const updateLike = (id, token, fetchMethod = 'POST') => {
 
   fetch(url, options)
     .then(response => response.json())
-    .then(data => {
-      console.log('data: ', data);
-      return data.photo.likes;
-    })
+    .then(data => data)
     .catch(error => {
       console.error(error);
     });

@@ -1,39 +1,23 @@
-.like {
+.like,
+.liked {
   background-color: transparent;
-  background-image: url('./img/likes.svg');
   background-size: 26px;
   background-position: left center;
   background-repeat: no-repeat;
   display: block;
   height: 30px;
-  cursor: pointer;
+  line-height: 30px;
   padding-left: 30px;
   font-weight: 700;
   border: none;
   color: var(--white);
-  transition: background-image 0.36s ease-in-out;
 }
 
-.like:hover {
-  background-image: url('./img/liked.svg');
+.like {
+  background-image: url('./img/likes.svg');
 }
+
 
 .liked {
   background-image: url('./img/liked.svg');
-  background-color: transparent;
-  background-size: 26px;
-  background-position: left center;
-  background-repeat: no-repeat;
-  display: block;
-  height: 30px;
-  cursor: pointer;
-  padding-left: 30px;
-  font-weight: 700;
-  border: none;
-  color: var(--white);
-  transition: background-image 0.36s ease-in-out;
-}
-
-.liked:hover {
-  background-image: url('./img/likes.svg');
 }

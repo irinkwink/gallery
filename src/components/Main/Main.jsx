@@ -2,7 +2,7 @@ import style from './Main.module.css';
 import Layout from '../Layout';
 import List from './List';
 import {Route, Routes} from 'react-router-dom';
-import Modal from '../Modal';
+import PhotoPage from '../PhotoPage';
 import {Text} from '../../UI/Text';
 
 export const Main = props => {
@@ -13,8 +13,7 @@ export const Main = props => {
         <Routes>
           <Route path='photo/:id' element={
             <>
-              <List />
-              <Modal />
+              <PhotoPage />
             </>
           }></Route>
           <Route path='/' element={
