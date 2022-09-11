@@ -11,8 +11,12 @@
   font-weight: 700;
   border: none;
   color: var(--white);
+  transition: background-image 0.36s ease-in-out;
 }
 
+.like:hover {
+  background-image: url('./img/liked.svg');
+}
 
 .liked {
   background-image: url('./img/liked.svg');
@@ -27,4 +31,9 @@
   font-weight: 700;
   border: none;
   color: var(--white);
+  transition: background-image 0.36s ease-in-out;
+}
+
+.liked:hover {
+  background-image: url('./img/likes.svg');
 }

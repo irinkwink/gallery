@@ -42,6 +42,9 @@ export const getToken = () => {
         setToken(token);
         dispatch(updateToken(token));
         location.replace('/');
+      })
+      .catch(error => {
+        console.error(error);
       });
   }
 

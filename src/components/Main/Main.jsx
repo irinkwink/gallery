@@ -12,7 +12,10 @@ export const Main = props => {
       <Layout>
         <Routes>
           <Route path='photo/:id' element={
-            <Modal />
+            <>
+              <List />
+              <Modal />
+            </>
           }></Route>
           <Route path='/' element={
             <List />

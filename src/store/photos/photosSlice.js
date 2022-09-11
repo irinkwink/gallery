@@ -2,7 +2,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import {photosRequestAsync} from './photosAction';
 
 const initialState = {
-  loading: false,
   photos: [],
   error: '',
   page: 1,

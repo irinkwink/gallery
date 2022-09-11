@@ -1,8 +1,10 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Outlet} from 'react-router-dom';
+import {DELAY} from '../../../api/const';
+import {addError, removeError} from '../../../store/errorsReducer';
 import {photosRequestAsync} from '../../../store/photos/photosAction';
-// import {photosSlice} from '../../../store/photos/photosSlice';
+import {photosSlice} from '../../../store/photos/photosSlice';
 import Preloader from '../../../UI/Preloader';
 import {generateRandomId} from '../../../utils/generateRandomId';
 import style from './List.module.css';
@@ -12,21 +14,40 @@ import Photo from './Photo';
 
 export const List = () => {
   const dispatch = useDispatch();
-  // const token = useSelector(state => state.token.token);
-
-
-  // useEffect(() => {
-  //   dispatch(photosSlice.actions.photosClear());
-  // });
 
   const photos = useSelector(state => state.photos.photos);
   const loading = useSelector(state => state.photos.loading);
+  console.log('loading: ', loading);
+  const error = useSelector(state => state.photos.error);
+  console.log('error: ', error);
   const page = useSelector(state => state.photos.page);
   const endList = useRef(null);
 
   const firstLoading = page === 1 ? loading : false;
+  console.log('firstLoading: ', firstLoading);
 
-  const isShowButton = page > 3;
+  const isShowButton = page > 2;
+
+  useEffect(() => {
+    if (page === 1) {
+      dispatch(photosSlice.actions.photosClear());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (error) {
+      const errorMessage = error.includes('status code 403') ?
+      `Исчерпан лимит запросов` :
+      `Ошибка загрузки фотографий`;
+
+      dispatch(addError(errorMessage));
+      setTimeout(() => {
+        dispatch(removeError());
+      }, DELAY);
+    }
+
+    dispatch(photosSlice.actions.photosClear());
+  }, [error]);
 
   const handleClick = (e) => {
     e.target.blur();
@@ -39,7 +60,6 @@ export const List = () => {
       if (entries[0].isIntersecting) {
         if (!location.search.includes('code')) {
           dispatch(photosRequestAsync());
-          console.log('photosRequestAsync: ');
         }
       }
     }, {
@@ -47,7 +67,6 @@ export const List = () => {
     });
 
     if (endList.current) {
-      console.log('endList.current: ', endList.current);
       observer.observe(endList.current);
     }
     return () => {
@@ -66,7 +85,10 @@ export const List = () => {
           photos.length > 0 ? (
             <>
               {photos.map(photo =>
-                <Photo key={generateRandomId()} photoData={photo} />)}
+                <Photo
+                  key={generateRandomId()}
+                  photoData={photo}
+                />)}
             </>
           ) : (
             <Preloader size={100} />

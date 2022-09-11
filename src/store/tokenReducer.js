@@ -2,6 +2,7 @@ import {setToken} from '../api/token';
 
 const initialState = {
   token: '',
+  error: '',
 };
 
 const UPDATE_TOKEN = 'UPDATE_TOKEN';
@@ -12,9 +13,10 @@ export const updateToken = token => ({
   token,
 });
 
-export const deleteToken = () => ({
+export const deleteToken = (error = '') => ({
   type: DELETE_TOKEN,
   token: '',
+  error,
 });
 
 export const tokenMiddleware = store => next => (action) => {
@@ -36,6 +38,7 @@ export const tokenReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.token,
+        error: '',
       };
 
     case DELETE_TOKEN:
@@ -43,6 +46,7 @@ export const tokenReducer = (state = initialState, action) => {
       return {
         ...state,
         token: '',
+        error: action.error,
       };
 
     default:

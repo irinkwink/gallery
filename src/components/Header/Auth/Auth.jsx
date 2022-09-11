@@ -8,9 +8,9 @@ import {useDispatch} from 'react-redux';
 import {deleteToken} from '../../../store/tokenReducer';
 import {useAuth} from '../../../hooks/useAuth';
 import Preloader from '../../../UI/Preloader';
-import ErrorModal from '../../errorModal';
 import {useNavigate} from 'react-router-dom';
-
+import {addError, removeError} from '../../../store/errorsReducer';
+import {DELAY} from '../../../api/const';
 
 export const Auth = () => {
   const dispatch = useDispatch();
@@ -27,18 +27,21 @@ export const Auth = () => {
     if (error) {
       navigate(`/`);
 
+      const errorMessage = error.includes('status code 403') ?
+      `Исчерпан лимит запросов` :
+      `Ошибка авторизации`;
+
+      dispatch(addError(errorMessage));
       setTimeout(() => {
+        dispatch(removeError());
         clearAuth();
-      }, 5000);
+      }, DELAY);
     }
   }, [error]);
 
 
   return (
     <div className={style.container}>
-      {error && (
-        <ErrorModal error={`Ошибка авторизации: ${error}`}/>
-      )}
       {loading ? (
         <Preloader size={30}/>
       ) : auth.name ? (

@@ -1,21 +1,23 @@
-import style from './errorModal.module.css';
-import PropTypes from 'prop-types';
+import style from './ErrorModal.module.css';
 import ReactDOM from 'react-dom';
-import {Text} from '../../UI/Text';
+import {useSelector} from 'react-redux';
+import {generateRandomId} from '../../utils/generateRandomId';
+import Error from './Error';
+import Layout from '../Layout';
 
-export const errorModal = ({error}) => {
-  console.log();
+export const ErrorModal = () => {
+  const errors = useSelector(state => state.errors.errors);
+
   return ReactDOM.createPortal(
-    <div className={style.error}>
-      <Text As='p' color='white' size={18} tsize={24} medium center>
-        {error}
-      </Text>
-    </div>,
+    <ul className={style.errors}>
+      {errors.length > 0 &&
+        <Layout >
+          {errors.map(error =>
+            <Error key={generateRandomId()} error={error} />)}
+        </Layout>}
+    </ul>,
     document.getElementById('error-root'),
   );
 };
 
-errorModal.propTypes = {
-  error: PropTypes.string,
-};
 

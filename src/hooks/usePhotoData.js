@@ -7,6 +7,8 @@ import {photoRequestAsync}
 export const usePhotoData = (id) => {
   const dispatch = useDispatch();
   const photo = useSelector(state => state.photo.photo);
+  const likes = useSelector(state => state.photo.likes);
+  const isLiked = useSelector(state => state.photo.isLiked);
   const status = useSelector(state => state.photo.status);
   const error = useSelector(state => state.photo.error);
 
@@ -14,5 +16,5 @@ export const usePhotoData = (id) => {
     dispatch(photoRequestAsync(id));
   }, []);
 
-  return [photo, status, error];
+  return [photo, likes, isLiked, status, error];
 };

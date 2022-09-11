@@ -1,3 +1,3 @@
-import {errorModal} from './errorModal';
+import {ErrorModal} from './ErrorModal';
 
-export default errorModal;
+export default ErrorModal;

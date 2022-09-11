@@ -5,7 +5,7 @@ export const Logo = props => {
   console.log();
   return (
     <a className={style.link} href="/">
-      <img className={style.logo} src={logo} alt="Логотип Blogget" />
+      <img className={style.logo} src={logo} alt="Логотип Unsplash" />
     </a>
   );
 };

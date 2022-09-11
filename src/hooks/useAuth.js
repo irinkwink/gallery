@@ -12,7 +12,6 @@ export const useAuth = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('authRequestAsync: ');
     dispatch(authRequestAsync());
   }, [token]);
 

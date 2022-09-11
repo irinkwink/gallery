@@ -9,13 +9,14 @@ import {Link} from 'react-router-dom';
 
 export const Photo = ({photoData}) => {
   const id = photoData.id;
-  const thumbnail = photoData.urls.regular;
+  const thumbnail = photoData.urls.small;
   const alt = photoData.alt_description;
   const author = photoData.user.name;
   const authorLink = photoData.user.links.html;
   const date = photoData.created_at;
   const likes = photoData.likes;
   const isLiked = photoData.liked_by_user;
+
 
   return (
     <li className={style.photo}>
@@ -28,7 +29,7 @@ export const Photo = ({photoData}) => {
 
       <div className={style.content}>
         <div className={style.wrapper}>
-          <Likes likes={likes} liked={isLiked}/>
+          <Likes likes={likes} liked={isLiked} id={id}/>
           <Author author={author} link={authorLink} />
         </div>
 
