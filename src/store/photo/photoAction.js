@@ -20,15 +20,13 @@ export const photoRequestAsync = createAsyncThunk(
     const searchParams = new URLSearchParams('');
     searchParams.append('client_id', ACCESS_KEY);
 
-    const url = `${API_URL}/photos/:${id}?${searchParams.toString()}`;
+    const url = `${API_URL}/photos/${id}?${searchParams.toString()}`;
 
     return axios(url, options)
       .then(({data}) => {
         console.log('dataPhoto: ', data);
         // let newPhotos = data;
-        return ({
-          // photos: newPhotos,
-        });
+        return data;
       })
       .catch(error => {
         console.error(error);

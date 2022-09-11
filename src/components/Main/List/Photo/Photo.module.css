@@ -15,6 +15,7 @@
   z-index: 2;
   position: absolute;
   display: flex;
+  background-color: rgba(0, 0, 0, 0.6);
   justify-content: space-between;
   align-items: center;
   bottom: 0;

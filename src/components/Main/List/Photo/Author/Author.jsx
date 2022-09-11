@@ -7,8 +7,8 @@ export const Author = ({author, link}) => {
   return (
     <Text
       As='a'
-      size={12}
-      tsize={14}
+      size={14}
+      tsize={16}
       color='white'
       className={style.linkAuthor}
       href={link}

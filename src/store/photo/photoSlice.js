@@ -3,7 +3,7 @@ import {photoRequestAsync} from './photoAction';
 
 const initialState = {
   loading: false,
-  id: '',
+  photo: {},
   error: '',
 };
 
@@ -18,8 +18,7 @@ export const photoSlice = createSlice({
       state.error = '';
     },
     [photoRequestAsync.fulfilled]: (state, action) => {
-      state.post = action.payload.post;
-      state.comments = action.payload.comments;
+      state.photo = action.payload;
       state.status = 'loaded';
       state.error = '';
     },

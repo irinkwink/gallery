@@ -5,7 +5,7 @@
   width: 100%;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #c0f0f0;
+  background-color: var(--blue);
   z-index: 10;
 }
 

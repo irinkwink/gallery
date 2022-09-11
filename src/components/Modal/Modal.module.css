@@ -7,42 +7,98 @@
 
 .modal {
   position: absolute;
+  display: flex;
+  justify-content: center;
   left: 50%;
+  transform: translateX(-50%);
   background-color: var(--white);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 20px 15px;
-  inset: 5%;
+  top: 5%;
   border-radius: 16px;
   margin-bottom: 10px;
+  width: fit-content;
+}
+
+.card {
+  height: 100%;
+  width: fit-content;
+  margin: 0, auto;
 }
 
 
-.title {
-  margin-bottom: 30px;
-  padding-right: 50px;
+.img {
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  height: calc(100% - 60px);
+  margin-bottom: 10px;
+  /* object-fit: cover; */
 }
 
 .content {
-  margin-bottom: 20px;
+  z-index: 2;
+  /* position: absolute; */
+  display: flex;
+  background-color: var(--white);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
-.content p {
-  margin-bottom: 20px;
-  font-size: 14px;
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.content p:last-child {
-  margin-bottom: 0;
+.like {
+  background-color: transparent;
+  background-image: url('./img/likes.svg');
+  background-size: 26px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 30px;
+  cursor: pointer;
+  padding-left: 30px;
+  font-weight: 700;
+  border: none;
+  color: var(--black);
 }
 
-.content a {
+
+.liked {
+  background-image: url('./img/liked.svg');
+  background-color: transparent;
+  background-size: 26px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 30px;
+  cursor: pointer;
+  padding-left: 30px;
+  font-weight: 700;
+  border: none;
+  color: var(--black);
+}
+
+.linkAuthor {
+  position: relative;
+  transition: color 0.36s ease-in-out;
+}
+
+.linkAuthor:hover {
   color: var(--orange);
 }
 
-.author {
-  margin-bottom: 30px;
+.date {
+  font-size: 12px;
+  line-height: 130%;
+  color: var(--black);
 }
+
 
 .close {
   position: absolute;
@@ -54,10 +110,15 @@
   height: 15px;
 }
 
+@media (min-width: 580px) {
+  .date {
+    font-size: 16px;
+  }
+}
+
 @media (min-width: 768px) {
   .modal {
     padding: 30px;
-    inset: 10%;
   }
   
   .content p {
@@ -68,6 +129,5 @@
 @media (min-width: 1024px) {
   .modal {
     padding: 50px;
-    inset: 15%;
   }
 }

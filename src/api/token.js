@@ -37,12 +37,8 @@ export const getToken = () => {
 
     fetch(url, {method: 'POST'})
       .then(response => response.json())
-      .then(data => {
-        console.log('data: ', data);
-        return data.access_token;
-      })
+      .then(data => data.access_token)
       .then(token => {
-        console.log('token: ', token);
         setToken(token);
         dispatch(updateToken(token));
         location.replace('/');

@@ -3,25 +3,21 @@ import {ReactComponent as CloseIcon} from './img/close.svg';
 import ReactDOM from 'react-dom';
 import {useEffect, useRef} from 'react';
 import {usePhotoData} from '../../hooks/usePhotoData';
-// import FormComment from './FormComment';
+import Preloader from '../../UI/Preloader';
 import {Text} from '../../UI/Text';
-// import {useSelector} from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {photoRequestAsync}
-  from '../../store/photo/photoAction';
+import formatDate from '../../utils/formatDate';
 
 export const Modal = () => {
   const {id} = useParams();
+  console.log('id: ', id);
   const navigate = useNavigate();
-  const [post, status, error] = usePhotoData(id);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(photoRequestAsync(id));
-  }, []);
-
   const overlayRef = useRef(null);
+  const [photo, status, error] = usePhotoData(id);
+
+  const handleLikeClick = () => {
+    console.log();
+  };
 
   const navigateTo = () => {
     navigate(`/`);
@@ -43,6 +39,7 @@ export const Modal = () => {
     }
   };
 
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => {
@@ -61,34 +58,46 @@ export const Modal = () => {
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
         {status === 'loading' && (
-          <Text As='p' size={18} tsize={24}>
-            Загрузка...
-          </Text>)}
+          <Preloader size={100} />)}
         {status === 'error' && (
           <Text As='p' size={18} tsize={24}>
             Ошибка: {error}
           </Text>)}
         {status === 'loaded' && (
-          <>
-            <Text As='h2' className={style.title} size={18} tsize={24}>
-              {post.title}
-            </Text>
+          <div className={style.card}>
+            <img
+              className={style.img}
+              src={photo.urls.full}
+              alt={photo.alt_description}
+            />
 
             <div className={style.content}>
+              <div className={style.wrapper}>
+                <button
+                  className={style[photo.liked_by_user ? 'liked' : 'like']}
+                  onClick={handleLikeClick}
+                >
+                  {photo.likes}
+                </button>
+                <Text
+                  As='a'
+                  size={14}
+                  tsize={16}
+                  color='black'
+                  className={style.linkAuthor}
+                  href={photo.user.links.htmlk}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {photo.user.name}
+                </Text>
+              </div>
 
+              <time className={style.date} dateTime={photo.created_at}>
+                {formatDate(photo.created_at)}
+              </time>
             </div>
-
-            <Text As='p' className={style.author} size={14} tsize={16}>
-              {post.author}
-            </Text>
-
-            {/* {token ?
-              <FormComment /> :
-              <Text As='p' color='orange' size={16} tsize={20} bold>
-                Авторизуйтесь, чтобы оставлять комментарии
-              </Text>
-            */}
-          </>
+          </div>
         )}
 
         <button

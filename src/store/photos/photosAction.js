@@ -9,7 +9,6 @@ export const photosRequestAsync = createAsyncThunk(
   (_, {getState, rejectWithValue}) => {
     const token = getState().token.token;
     const {photos, page, count} = getState().photos;
-    console.log('photos: ', photos);
 
     let options = {};
 
@@ -32,7 +31,6 @@ export const photosRequestAsync = createAsyncThunk(
 
     return axios(url, options)
       .then(({data}) => {
-        console.log('data: ', data);
         let newPhotos = data;
         if (page > 1) {
           newPhotos = [...photos, ...newPhotos];

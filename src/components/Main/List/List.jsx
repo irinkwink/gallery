@@ -7,7 +7,7 @@ import Preloader from '../../../UI/Preloader';
 import {generateRandomId} from '../../../utils/generateRandomId';
 import style from './List.module.css';
 import Photo from './Photo';
-import {Text} from '../../../UI/Text';
+// import {Text} from '../../../UI/Text';
 
 
 export const List = () => {
@@ -20,15 +20,13 @@ export const List = () => {
   // });
 
   const photos = useSelector(state => state.photos.photos);
-  console.log('photos: ', photos);
   const loading = useSelector(state => state.photos.loading);
   const page = useSelector(state => state.photos.page);
-  console.log('page: ', page);
   const endList = useRef(null);
 
   const firstLoading = page === 1 ? loading : false;
 
-  const isShowButton = page > 2;
+  const isShowButton = page > 3;
 
   const handleClick = (e) => {
     e.target.blur();
@@ -39,14 +37,17 @@ export const List = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        dispatch(photosRequestAsync());
-        console.log('photosRequestAsync: ');
+        if (!location.search.includes('code')) {
+          dispatch(photosRequestAsync());
+          console.log('photosRequestAsync: ');
+        }
       }
     }, {
       rootMargin: '50px',
     });
 
     if (endList.current) {
+      console.log('endList.current: ', endList.current);
       observer.observe(endList.current);
     }
     return () => {
@@ -68,17 +69,11 @@ export const List = () => {
                 <Photo key={generateRandomId()} photoData={photo} />)}
             </>
           ) : (
-            <div className={style.wrapper}>
-              <Text As='p' color='orange' size={22} tsize={26} center>
-                Ошибка запроса фотографий.
-              </Text>
-              <Text As='p' size={20} tsize={24} center>
-                Попробуйте перезагрузить страницу.
-              </Text>
-            </div>
+            <Preloader size={100} />
           )
         )}
-        {loading && !firstLoading ? (
+      </ul>
+      {loading && !firstLoading ? (
           <Preloader size={45} />
         ) : (
           isShowButton ? (
@@ -89,10 +84,9 @@ export const List = () => {
               загрузить ещё
             </button>
           ) : (
-            <li className={style.end} ref={endList}/>
+            <div className={style.end} ref={endList}/>
           )
         )}
-      </ul>
       <Outlet />
     </>
   );
