@@ -27,6 +27,7 @@ export const Auth = () => {
   const logOut = () => {
     dispatch(deleteToken());
     clearAuth();
+    navigate('/');
   };
 
   useEffect(() => {
